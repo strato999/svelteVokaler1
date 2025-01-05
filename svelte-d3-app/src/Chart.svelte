@@ -60,13 +60,14 @@
       .attr('class', 'dot')
       .attr('cx', d => x(d.date))
       .attr('cy', d => y(d.memory))
-      .attr('r', 3);
+      .attr('r', 1) // Smaller radius
+      .attr('fill', 'red'); // Red color
   }
 </script>
 
 <style>
   .dot {
-    fill: steelblue;
+    fill: red;
   }
 </style>
 
