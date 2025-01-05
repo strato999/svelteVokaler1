@@ -28,7 +28,7 @@
     const height = +svg.attr('height') - margin.top - margin.bottom;
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    const x = d3.scaleLinear().domain(d3.extent(data, d => d.elapsedTime)).range([0, width]);
+    const x = d3.scaleTime().domain(d3.extent(data, d => d.date)).range([0, width]);
     const y = d3.scaleLinear().domain(d3.extent(data, d => d.memory)).range([height, 0]);
 
     g.append('g')
@@ -42,31 +42,15 @@
       .data(data)
       .enter().append('circle')
       .attr('class', 'dot')
-      .attr('cx', d => x(d.elapsedTime))
+      .attr('cx', d => x(d.date))
       .attr('cy', d => y(d.memory))
       .attr('r', 3);
-
-    const days = [...new Set(data.map(d => d.date.toLocaleDateString()))];
-
-    g.selectAll('.day-label')
-      .data(days)
-      .enter().append('text')
-      .attr('class', 'day-label')
-      .attr('x', d => x(data.find(entry => entry.date.toLocaleDateString() === d).elapsedTime))
-      .attr('y', -10)
-      .text(d => d);
   }
 </script>
 
 <style>
   .dot {
     fill: steelblue;
-  }
-
-  .day-label {
-    fill: black;
-    font-size: 10px;
-    text-anchor: start;
   }
 </style>
 
