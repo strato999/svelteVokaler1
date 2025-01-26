@@ -6,7 +6,13 @@
   let label = '';
 
   onMount(async () => {
-    const response = await fetch('/data.txt');
+    //const response = await fetch('/data.txt');
+    //const response = await fetch('/dataMat.txt');
+    //const response = await fetch('/dataSP.txt');
+    //const response = await fetch('/dataSP_dec14.txt');
+    //const response = await fetch('/dataMat_dec14.txt');
+    const response = await fetch('/dataMat_jan16.txt');
+	console.log('Using dataMat_jan16.txt');
     const text = await response.text();
     const lines = text.trim().split('\n');
 
@@ -60,7 +66,7 @@
       .attr('class', 'dot')
       .attr('cx', d => x(d.date))
       .attr('cy', d => y(d.memory))
-      .attr('r', 1) // Smaller radius
+      .attr('r', 0.5) // Smaller radius
       .attr('fill', 'red'); // Red color
   }
 </script>
