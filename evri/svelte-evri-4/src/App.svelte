@@ -22,6 +22,8 @@
 		    console.log('sendRequest, data = ' + data);
 		    console.log('sendRequest, data.response.error = ' + data.response.error);
 		    console.log('sendRequest, data.response.result = ' + data.response.result);
+			let ttype = typeof  data.response.result;
+			console.log('typeof data.response.result = ' + ttype);
             // Check for errors in the response
             if (data.response.error) {
                 responseMessage = `Error: ${data.response.error}`;
