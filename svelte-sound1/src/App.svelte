@@ -56,7 +56,7 @@
   }
 
   main {
-    background-color: lightblue;
+    background-color: #FECC00;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -68,15 +68,15 @@
   .buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 2rem;
     justify-content: center;
   }
 
   button {
-    background-color: yellow;
+    background-color: lightblue;
     border: none;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
+    padding: 2rem 4rem;
+    font-size: 2.4rem;
     cursor: pointer;
     border-radius: 5px;
     transition: transform 0.1s;
@@ -88,7 +88,7 @@
 </style>
 
 <main>
-  <h1>Svelte Sound SPA</h1>
+  <h1>Vokaler_Ludvig</h1>
   <div class="buttons">
     {#each buttons as button}
       <button on:click={() => playSound(button)}>
