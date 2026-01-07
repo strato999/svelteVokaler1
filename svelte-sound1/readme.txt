@@ -17,3 +17,20 @@ In Cmder:
 …then in another cmd window run: 
        npm run start
 …and this works
+
+
+Vokaler:
+https://www.youtube.com/watch?v=wp96rLcxtC0		// excellent
+https://www.youtube.com/watch?v=hzYArZVTD4s		// maybe
+https://www.youtube.com/watch?v=U82ospRgS08		// okay
+
+Tuesday, January 6, 2025: ---
+Try Claude Code on this E:\usersdonal\Code\javascript\svelte\Development\svelte-sound1
+
+Added folder E:\usersdonal\Code\javascript\svelte\Development\svelte-sound1\public\vokaler_ludvig, which has nine .opus files with names, without suffix, are: a, e, i, o, u, y, å, ä, ö
+
+
+
+
+
+
