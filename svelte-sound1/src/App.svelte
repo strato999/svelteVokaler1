@@ -1,11 +1,52 @@
 <script>
-  // Array of button labels
-  const buttons = Array.from({ length: 10 }, (_, i) => `A${i + 1}`);
+  // Array of vowel labels for the first 9 buttons
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'å', 'ä', 'ö'];
+
+  // All buttons: 9 vowels + 1 "All" button
+  const buttons = [...vowels, 'All'];
+
+  // Track currently playing audio and whether to stop the sequence
+  let currentAudio = null;
+  let stopSequence = false;
+
+  // Function to stop any currently playing audio
+  function stopCurrentAudio() {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+      currentAudio = null;
+    }
+    stopSequence = true;
+  }
 
   // Function to play the corresponding sound
-  function playSound(label) {
-    const audio = new Audio(`/mySounds/${label}.mp3`);
-    audio.play();
+  async function playSound(label) {
+    // Stop any currently playing audio first
+    stopCurrentAudio();
+
+    if (label === 'All') {
+      stopSequence = false;
+      // Play all sounds in sequence with 0.5 second pause between each
+      for (const vowel of vowels) {
+        if (stopSequence) break; // Stop if another button was clicked
+
+        currentAudio = new Audio(`/vokaler_ludvig/${vowel}.opus`);
+        // Wait for the audio to finish playing
+        await new Promise(resolve => {
+          currentAudio.onended = resolve;
+          currentAudio.play();
+        });
+
+        if (stopSequence) break; // Stop if another button was clicked during playback
+
+        // Wait for 0.5 seconds before playing the next sound
+        await new Promise(resolve => setTimeout(resolve, 500));
+      }
+      currentAudio = null;
+    } else {
+      currentAudio = new Audio(`/vokaler_ludvig/${label}.opus`);
+      currentAudio.play();
+    }
   }
 </script>
 
