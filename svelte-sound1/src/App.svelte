@@ -1,4 +1,31 @@
 <script>
+  // Password protection
+  const CORRECT_PASSWORD = 'Kalmar9';
+  let isAuthenticated = false;
+  let passwordInput = '';
+  let passwordError = false;
+
+  // Check if user has already authenticated
+  if (typeof window !== 'undefined') {
+    isAuthenticated = localStorage.getItem('vokaler_auth') === 'true';
+  }
+
+  function checkPassword() {
+    if (passwordInput === CORRECT_PASSWORD) {
+      isAuthenticated = true;
+      localStorage.setItem('vokaler_auth', 'true');
+      passwordError = false;
+    } else {
+      passwordError = true;
+    }
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      checkPassword();
+    }
+  }
+
   // Array of vowel labels for the first 9 buttons
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'å', 'ä', 'ö'];
 
@@ -126,36 +153,114 @@
   .button-text-line {
     min-height: 1.2em;
   }
+
+  .password-screen {
+    background-color: #FECC00;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .password-container {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .password-container h2 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  .password-container input {
+    padding: 0.8rem;
+    font-size: 1.2rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    margin-bottom: 1rem;
+  }
+
+  .password-container input:focus {
+    outline: none;
+    border-color: lightblue;
+  }
+
+  .password-container button {
+    background-color: lightblue;
+    color: #333;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .password-container button:hover {
+    background-color: #add8e6;
+  }
+
+  .error-message {
+    color: red;
+    margin-top: 0.5rem;
+    font-weight: bold;
+  }
 </style>
 
-<main>
-  <h1>Vokaler_Ludvig</h1>
-  <div class="buttons-container">
-    <div class="button-row">
-      {#each row1 as buttonData}
-        <div class="button-wrapper">
-          <button on:click={() => playSound(buttonData.label)}>
-            {buttonData.label}
-          </button>
-          <div class="button-text">
-            <div class="button-text-line">{buttonData.longText}</div>
-            <div class="button-text-line">{buttonData.shortText}</div>
-          </div>
-        </div>
-      {/each}
-    </div>
-    <div class="button-row">
-      {#each row2 as buttonData}
-        <div class="button-wrapper">
-          <button on:click={() => playSound(buttonData.label)}>
-            {buttonData.label}
-          </button>
-          <div class="button-text">
-            <div class="button-text-line">{buttonData.longText}</div>
-            <div class="button-text-line">{buttonData.shortText}</div>
-          </div>
-        </div>
-      {/each}
+{#if !isAuthenticated}
+  <div class="password-screen">
+    <div class="password-container">
+      <h2>Vokaler_Ludvig</h2>
+      <p>Please enter the password to access this application:</p>
+      <input
+        type="password"
+        bind:value={passwordInput}
+        on:keypress={handleKeyPress}
+        placeholder="Enter password"
+        autofocus
+      />
+      <br>
+      <button on:click={checkPassword}>Submit</button>
+      {#if passwordError}
+        <p class="error-message">Incorrect password. Please try again.</p>
+      {/if}
     </div>
   </div>
-</main>
+{:else}
+  <main>
+    <h1>Vokaler_Ludvig</h1>
+    <div class="buttons-container">
+      <div class="button-row">
+        {#each row1 as buttonData}
+          <div class="button-wrapper">
+            <button on:click={() => playSound(buttonData.label)}>
+              {buttonData.label}
+            </button>
+            <div class="button-text">
+              <div class="button-text-line">{buttonData.longText}</div>
+              <div class="button-text-line">{buttonData.shortText}</div>
+            </div>
+          </div>
+        {/each}
+      </div>
+      <div class="button-row">
+        {#each row2 as buttonData}
+          <div class="button-wrapper">
+            <button on:click={() => playSound(buttonData.label)}>
+              {buttonData.label}
+            </button>
+            <div class="button-text">
+              <div class="button-text-line">{buttonData.longText}</div>
+              <div class="button-text-line">{buttonData.shortText}</div>
+            </div>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </main>
+{/if}

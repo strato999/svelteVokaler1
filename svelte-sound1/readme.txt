@@ -75,6 +75,10 @@ Switch words to:
   
 Check-in: Add the swedish example words. 
 
+CC: Add a password which user must enter the first time they access the SPA. The password is case-sensitive: Kalmar9
+Check-in: Added password protection. The password is case-sensitive: Kalmar9
+
+
 Question: What are some options for hosting this SPA on a website, where it is publicly accessible but requires a password be used to access it?
 
 Netlify
