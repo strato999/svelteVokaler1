@@ -44,6 +44,14 @@ Make change: Clicking any button will first stop any currently playing sound-fil
 Make change: Change the displayed label "Svelte Sound SPA" with the name of the sound-file folder used, currently "vokaler_ludvig", with the first letter of each sub-word (separated by "_") as uppercase, so will be "Vokaler_Ludvig".
 Change the background color to the yellow-gold seen in the flag of Sweden. Change the button background to light-blue. Make the buttons twice as large and separate them by half their width.
 
+// checked folder changes in.
+// Use: npm run build
+// Use: npm run start
+
+Note that I can use a cmd window and 
+cd E:\usersdonal\Code\javascript\svelte\Development\svelte-sound1
+npm run build   // ignore errors
+npm run start	// then open browser at listed URL, like http://localhost:53530
 
 
 

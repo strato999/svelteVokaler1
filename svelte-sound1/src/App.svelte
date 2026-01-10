@@ -2,8 +2,9 @@
   // Array of vowel labels for the first 9 buttons
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'å', 'ä', 'ö'];
 
-  // All buttons: 9 vowels + 1 "All" button
-  const buttons = [...vowels, 'All'];
+  // Split into two rows of 5 buttons each
+  const row1 = vowels.slice(0, 5);  // a, e, i, o, u
+  const row2 = [...vowels.slice(5), 'All'];  // y, å, ä, ö, All
 
   // Track currently playing audio and whether to stop the sequence
   let currentAudio = null;
@@ -65,21 +66,31 @@
     gap: 1rem;
   }
 
-  .buttons {
+  .buttons-container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
   }
+
+  .button-row {
+    display: flex;
+    gap: 1.5vw;
+    justify-content: center;
+    width: 100%;
+  }
+
 
   button {
     background-color: lightblue;
     border: none;
-    padding: 2rem 4rem;
-    font-size: 2.4rem;
+    padding: min(2rem, 3vh) min(4rem, 8vw);
+    font-size: min(2.4rem, 4vw);
     cursor: pointer;
     border-radius: 5px;
     transition: transform 0.1s;
+    flex-shrink: 1;
+    white-space: nowrap;
   }
 
   button:active {
@@ -89,11 +100,20 @@
 
 <main>
   <h1>Vokaler_Ludvig</h1>
-  <div class="buttons">
-    {#each buttons as button}
-      <button on:click={() => playSound(button)}>
-        {button}
-      </button>
-    {/each}
+  <div class="buttons-container">
+    <div class="button-row">
+      {#each row1 as button}
+        <button on:click={() => playSound(button)}>
+          {button}
+        </button>
+      {/each}
+    </div>
+    <div class="button-row">
+      {#each row2 as button}
+        <button on:click={() => playSound(button)}>
+          {button}
+        </button>
+      {/each}
+    </div>
   </div>
 </main>
