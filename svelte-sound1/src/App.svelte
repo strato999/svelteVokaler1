@@ -2,9 +2,20 @@
   // Array of vowel labels for the first 9 buttons
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'å', 'ä', 'ö'];
 
+  // Text labels for each button
+  const longLabels = ['apa', 'elbil', 'ishockey', 'odla', 'utan', 'ycklig', 'åsikt', 'äventyr', 'öde', ' '];
+  const shortLabels = ['alla', 'eld', 'ilska', 'oktober', 'ursäkta', 'yrke', 'ånga', 'ängel', 'önska', ' '];
+
+  // Create button data with labels
+  const allButtons = [...vowels, 'All'].map((button, index) => ({
+    label: button,
+    longText: longLabels[index],
+    shortText: shortLabels[index]
+  }));
+
   // Split into two rows of 5 buttons each
-  const row1 = vowels.slice(0, 5);  // a, e, i, o, u
-  const row2 = [...vowels.slice(5), 'All'];  // y, å, ä, ö, All
+  const row1 = allButtons.slice(0, 5);  // a, e, i, o, u
+  const row2 = allButtons.slice(5);     // y, å, ä, ö, All
 
   // Track currently playing audio and whether to stop the sequence
   let currentAudio = null;
@@ -80,6 +91,12 @@
     width: 100%;
   }
 
+  .button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
 
   button {
     background-color: lightblue;
@@ -96,23 +113,48 @@
   button:active {
     transform: scale(0.95);
   }
+
+  .button-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(min(2.4rem, 4vw) * 0.7);
+    color: inherit;
+    line-height: 1.2;
+  }
+
+  .button-text-line {
+    min-height: 1.2em;
+  }
 </style>
 
 <main>
   <h1>Vokaler_Ludvig</h1>
   <div class="buttons-container">
     <div class="button-row">
-      {#each row1 as button}
-        <button on:click={() => playSound(button)}>
-          {button}
-        </button>
+      {#each row1 as buttonData}
+        <div class="button-wrapper">
+          <button on:click={() => playSound(buttonData.label)}>
+            {buttonData.label}
+          </button>
+          <div class="button-text">
+            <div class="button-text-line">{buttonData.longText}</div>
+            <div class="button-text-line">{buttonData.shortText}</div>
+          </div>
+        </div>
       {/each}
     </div>
     <div class="button-row">
-      {#each row2 as button}
-        <button on:click={() => playSound(button)}>
-          {button}
-        </button>
+      {#each row2 as buttonData}
+        <div class="button-wrapper">
+          <button on:click={() => playSound(buttonData.label)}>
+            {buttonData.label}
+          </button>
+          <div class="button-text">
+            <div class="button-text-line">{buttonData.longText}</div>
+            <div class="button-text-line">{buttonData.shortText}</div>
+          </div>
+        </div>
       {/each}
     </div>
   </div>
