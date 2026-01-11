@@ -1,6 +1,6 @@
 <script>
   // Password protection
-  const CORRECT_PASSWORD = 'Kalmar9';
+  const CORRECT_PASSWORD = 'Kalmar1';
   let isAuthenticated = false;
   let passwordInput = '';
   let passwordError = false;
