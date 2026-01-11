@@ -26,12 +26,17 @@
     }
   }
 
+  // Derive the speaker name from the sound folder path
+  const soundFolder = 'vokaler_ludvig';
+  const speakerName = soundFolder.split('_')[1].charAt(0).toUpperCase() + soundFolder.split('_')[1].slice(1);
+  const pageTitle = `Svenska Vokaler (${speakerName})`;
+
   // Array of vowel labels for the first 9 buttons
-  const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'å', 'ä', 'ö'];
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'A', 'A'];
 
   // Text labels for each button
-  const longLabels = ['apa', 'elbil', 'ishockey', 'odla', 'utan', 'ycklig', 'åsikt', 'äventyr', 'öde', ' '];
-  const shortLabels = ['alla', 'eld', 'ilska', 'oktober', 'ursäkta', 'yrke', 'ånga', 'ängel', 'önska', ' '];
+  const longLabels = ['apa', 'elbil', 'ishockey', 'odla', 'utan', 'ycklig', 'Asikt', 'Aventyr', 'Ade', ' '];
+  const shortLabels = ['alla', 'eld', 'ilska', 'oktober', 'ursAkta', 'yrke', 'Anga', 'Angel', 'Anska', ' '];
 
   // Create button data with labels
   const allButtons = [...vowels, 'All'].map((button, index) => ({
@@ -42,7 +47,7 @@
 
   // Split into two rows of 5 buttons each
   const row1 = allButtons.slice(0, 5);  // a, e, i, o, u
-  const row2 = allButtons.slice(5);     // y, å, ä, ö, All
+  const row2 = allButtons.slice(5);     // y, A, A, A, All
 
   // Track currently playing audio and whether to stop the sequence
   let currentAudio = null;
@@ -69,7 +74,7 @@
       for (const vowel of vowels) {
         if (stopSequence) break; // Stop if another button was clicked
 
-        currentAudio = new Audio(`/vokaler_ludvig/${vowel}.opus`);
+        currentAudio = new Audio(`/${soundFolder}/${vowel}.opus`);
         // Wait for the audio to finish playing
         await new Promise(resolve => {
           currentAudio.onended = resolve;
@@ -83,7 +88,7 @@
       }
       currentAudio = null;
     } else {
-      currentAudio = new Audio(`/vokaler_ludvig/${label}.opus`);
+      currentAudio = new Audio(`/${soundFolder}/${label}.opus`);
       currentAudio.play();
     }
   }
@@ -215,7 +220,7 @@
 {#if !isAuthenticated}
   <div class="password-screen">
     <div class="password-container">
-      <h2>Vokaler_Ludvig</h2>
+      <h2>{pageTitle}</h2>
       <p>Please enter the password to access this application:</p>
       <input
         type="password"
@@ -233,7 +238,7 @@
   </div>
 {:else}
   <main>
-    <h1>Vokaler_Ludvig</h1>
+    <h1>{pageTitle}</h1>
     <div class="buttons-container">
       <div class="button-row">
         {#each row1 as buttonData}
