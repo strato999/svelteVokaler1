@@ -35,7 +35,7 @@
   const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'A', 'A'];
 
   // Text labels for each button
-  const longLabels = ['apa', 'elbil', 'ishockey', 'odla', 'utan', 'ycklig', 'Asikt', 'Aventyr', 'Ade', ' '];
+  const longLabels = ['apa', 'elbil', 'ishockey', 'odla', 'utan', 'ytlig', 'Asikt', 'Aventyr', 'Ade', ' '];
   const shortLabels = ['alla', 'eld', 'ilska', 'oktober', 'ursAkta', 'yrke', 'Anga', 'Angel', 'Anska', ' '];
 
   // Create button data with labels
@@ -74,7 +74,7 @@
       for (const vowel of vowels) {
         if (stopSequence) break; // Stop if another button was clicked
 
-        currentAudio = new Audio(`/${soundFolder}/${vowel}.opus`);
+        currentAudio = new Audio(`${soundFolder}/${vowel}.opus`);
         // Wait for the audio to finish playing
         await new Promise(resolve => {
           currentAudio.onended = resolve;
@@ -88,7 +88,7 @@
       }
       currentAudio = null;
     } else {
-      currentAudio = new Audio(`/${soundFolder}/${label}.opus`);
+      currentAudio = new Audio(`${soundFolder}/${label}.opus`);
       currentAudio.play();
     }
   }
