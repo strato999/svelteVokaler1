@@ -32,11 +32,11 @@
   const pageTitle = `Svenska Vokaler (${speakerName})`;
 
   // Array of vowel labels for the first 9 buttons
-  const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'A', 'A'];
+  const vowels = ['a', 'e', 'i', 'o', 'u', 'y', 'å', 'ä', 'ö'];
 
   // Text labels for each button
-  const longLabels = ['apa', 'elbil', 'ishockey', 'odla', 'utan', 'ytlig', 'Asikt', 'Aventyr', 'Ade', ' '];
-  const shortLabels = ['alla', 'eld', 'ilska', 'oktober', 'ursAkta', 'yrke', 'Anga', 'Angel', 'Anska', ' '];
+  const longLabels = ['apa', 'elbil', 'ishockey', 'odla', 'utan', 'ytlig', 'åsikt', 'äventyr', 'öde', ' '];
+  const shortLabels = ['alla', 'eld', 'ilska', 'oktober', 'ursäkta', 'yrke', 'ånga', 'ängel', 'önska', ' '];
 
   // Create button data with labels
   const allButtons = [...vowels, 'All'].map((button, index) => ({
@@ -47,7 +47,7 @@
 
   // Split into two rows of 5 buttons each
   const row1 = allButtons.slice(0, 5);  // a, e, i, o, u
-  const row2 = allButtons.slice(5);     // y, A, A, A, All
+  const row2 = allButtons.slice(5);     // y, å, ä, ö, All
 
   // Track currently playing audio and whether to stop the sequence
   let currentAudio = null;
